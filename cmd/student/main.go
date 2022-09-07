@@ -1,6 +1,7 @@
 package main
 
 import (
+	"finance/internal/conf"
 	"flag"
 	"os"
 
@@ -11,7 +12,6 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	"student/internal/conf"
 )
 
 // go build -ldflags "-X main.Version=x.y.z"

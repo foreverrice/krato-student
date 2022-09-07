@@ -1,14 +1,13 @@
 syntax = "proto3";
 package kratos.api;
 
-option go_package = "student/internal/conf;conf";
+option go_package = "cart/internal/conf;conf";
 
 import "google/protobuf/duration.proto";
 
 message Bootstrap {
   Server server = 1;
   Data data = 2;
-  Resource resource = 3;
 }
 
 message Server {
@@ -39,11 +38,4 @@ message Data {
   }
   Database database = 1;
   Redis redis = 2;
-}
-
-message Resource {
-  message Desc {
-    string info = 1;
-  }
-  Desc desc = 1;
 }

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProtobufSettings">
-    <option name="importRoots">
-      <list>
-        <ImportRootEntry>
-          <option name="path" value="file://$PROJECT_DIR$/../../../soft/protoc-3.13.0-osx-x86_64/include" />
-        </ImportRootEntry>
-      </list>
-    </option>
+    <roots>
+      <entry path="file://$PROJECT_DIR$/../../../../soft/protoc-3.13.0-osx-x86_64/include" />
+      <entry path="file://$PROJECT_DIR$/third_party" />
+    </roots>
   </component>
 </project>

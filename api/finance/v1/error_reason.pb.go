@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.27.1
 // 	protoc        v3.19.3
-// source: student/v1/error_reason.proto
+// source: finance/v1/error_reason.proto
 
 package v1
 
@@ -50,11 +50,11 @@ func (x ErrorReason) String() string {
 }
 
 func (ErrorReason) Descriptor() protoreflect.EnumDescriptor {
-	return file_student_v1_error_reason_proto_enumTypes[0].Descriptor()
+	return file_finance_v1_error_reason_proto_enumTypes[0].Descriptor()
 }
 
 func (ErrorReason) Type() protoreflect.EnumType {
-	return &file_student_v1_error_reason_proto_enumTypes[0]
+	return &file_finance_v1_error_reason_proto_enumTypes[0]
 }
 
 func (x ErrorReason) Number() protoreflect.EnumNumber {
@@ -63,12 +63,12 @@ func (x ErrorReason) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ErrorReason.Descriptor instead.
 func (ErrorReason) EnumDescriptor() ([]byte, []int) {
-	return file_student_v1_error_reason_proto_rawDescGZIP(), []int{0}
+	return file_finance_v1_error_reason_proto_rawDescGZIP(), []int{0}
 }
 
-var File_student_v1_error_reason_proto protoreflect.FileDescriptor
+var File_finance_v1_error_reason_proto protoreflect.FileDescriptor
 
-var file_student_v1_error_reason_proto_rawDesc = []byte{
+var file_finance_v1_error_reason_proto_rawDesc = []byte{
 	0x0a, 0x20, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x2f, 0x76, 0x31, 0x2f,
 	0x65, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x72, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x12, 0x0d, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x2e, 0x76,
@@ -86,22 +86,22 @@ var file_student_v1_error_reason_proto_rawDesc = []byte{
 }
 
 var (
-	file_student_v1_error_reason_proto_rawDescOnce sync.Once
-	file_student_v1_error_reason_proto_rawDescData = file_student_v1_error_reason_proto_rawDesc
+	file_finance_v1_error_reason_proto_rawDescOnce sync.Once
+	file_finance_v1_error_reason_proto_rawDescData = file_finance_v1_error_reason_proto_rawDesc
 )
 
-func file_student_v1_error_reason_proto_rawDescGZIP() []byte {
-	file_student_v1_error_reason_proto_rawDescOnce.Do(func() {
-		file_student_v1_error_reason_proto_rawDescData = protoimpl.X.CompressGZIP(file_student_v1_error_reason_proto_rawDescData)
+func file_finance_v1_error_reason_proto_rawDescGZIP() []byte {
+	file_finance_v1_error_reason_proto_rawDescOnce.Do(func() {
+		file_finance_v1_error_reason_proto_rawDescData = protoimpl.X.CompressGZIP(file_finance_v1_error_reason_proto_rawDescData)
 	})
-	return file_student_v1_error_reason_proto_rawDescData
+	return file_finance_v1_error_reason_proto_rawDescData
 }
 
-var file_student_v1_error_reason_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_student_v1_error_reason_proto_goTypes = []interface{}{
-	(ErrorReason)(0), // 0: student.v1.ErrorReason
+var file_finance_v1_error_reason_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_finance_v1_error_reason_proto_goTypes = []interface{}{
+	(ErrorReason)(0), // 0: finance.v1.ErrorReason
 }
-var file_student_v1_error_reason_proto_depIdxs = []int32{
+var file_finance_v1_error_reason_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -109,27 +109,27 @@ var file_student_v1_error_reason_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_student_v1_error_reason_proto_init() }
-func file_student_v1_error_reason_proto_init() {
-	if File_student_v1_error_reason_proto != nil {
+func init() { file_finance_v1_error_reason_proto_init() }
+func file_finance_v1_error_reason_proto_init() {
+	if File_finance_v1_error_reason_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_student_v1_error_reason_proto_rawDesc,
+			RawDescriptor: file_finance_v1_error_reason_proto_rawDesc,
 			NumEnums:      1,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_student_v1_error_reason_proto_goTypes,
-		DependencyIndexes: file_student_v1_error_reason_proto_depIdxs,
-		EnumInfos:         file_student_v1_error_reason_proto_enumTypes,
+		GoTypes:           file_finance_v1_error_reason_proto_goTypes,
+		DependencyIndexes: file_finance_v1_error_reason_proto_depIdxs,
+		EnumInfos:         file_finance_v1_error_reason_proto_enumTypes,
 	}.Build()
-	File_student_v1_error_reason_proto = out.File
-	file_student_v1_error_reason_proto_rawDesc = nil
-	file_student_v1_error_reason_proto_goTypes = nil
-	file_student_v1_error_reason_proto_depIdxs = nil
+	File_finance_v1_error_reason_proto = out.File
+	file_finance_v1_error_reason_proto_rawDesc = nil
+	file_finance_v1_error_reason_proto_goTypes = nil
+	file_finance_v1_error_reason_proto_depIdxs = nil
 }

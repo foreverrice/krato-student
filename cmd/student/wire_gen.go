@@ -7,13 +7,14 @@
 package main
 
 import (
-	"student/internal/biz"
-	"student/internal/conf"
-	"student/internal/data"
+	"finance/internal/biz"
+	"finance/internal/conf"
+	"finance/internal/data"
 
-	// "student/internal/data"
-	"student/internal/server"
-	"student/internal/service"
+	// "finance/internal/data"
+	"finance/internal/server"
+	"finance/internal/service"
+
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 )
@@ -26,11 +27,14 @@ func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	if err != nil {
 		return nil, nil, err
 	}
-	studentRepo := data.NewStudentRepo(dataData, logger)
-	studentUsecase := biz.NewStudentUsercase(studentRepo, logger)
-	studentService := service.NewStudentService(studentUsecase)
-	grpcServer := server.NewGRPCServer(confServer, studentService, logger)
-	httpServer := server.NewHTTPServer(confServer, studentService, logger)
+
+	// balance
+	balanceRepo := data.NewBalanceRepo(dataData, logger)
+	balanceUsecase := biz.NewBalanceUsecase(balanceRepo, logger)
+	balanceService := service.NewBalanceService(balanceUsecase)
+
+	grpcServer := server.NewGRPCServer(confServer, balanceService, logger)
+	httpServer := server.NewHTTPServer(confServer, balanceService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()

@@ -1,3 +1,4 @@
+//go:build wireinject
 // +build wireinject
 
 // The build tag makes sure the stub is not built in the final build.
@@ -5,14 +6,13 @@
 package main
 
 import (
-	"github.com/go-kratos/kratos/v2"
+	"finance/internal/biz"
+	"finance/internal/conf"
+	"finance/internal/data"
+	"finance/internal/server"
+	"finance/internal/service"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
-	"student/internal/biz"
-	"student/internal/conf"
-	"student/internal/data"
-	"student/internal/server"
-	"student/internal/service"
 )
 
 // wireApp init kratos application.
