@@ -10,4 +10,5 @@ option objc_class_prefix = "APIFinanceV1";
 enum ErrorReason {
   GEETER_UNSPECIFIED = 0;
   USER_NOT_FOUND = 1;
+  CREATE_BALANCE_FAIL = 2;
 }

@@ -4,6 +4,7 @@ import (
 	"context"
 	pb "finance/api/finance/v1"
 	"finance/internal/biz"
+	"fmt"
 )
 
 type BalanceService struct {
@@ -21,9 +22,11 @@ func (s *BalanceService) AddBatchBalanceDetail(ctx context.Context, req *pb.Bala
 
 func (s *BalanceService) AddBalanceAccount(ctx context.Context, req *pb.AddBalanceAccountReq) (*pb.AddBalanceAccountResp, error) {
 	res, err := s.uc.AddBalanceAccount(ctx, req)
+	fmt.Println(res, err)
 	if err != nil {
 		return nil, err
 	}
 
-	return res, nil
+	return res, err
+	//return &pb.AddBalanceAccountResp{}, nil
 }

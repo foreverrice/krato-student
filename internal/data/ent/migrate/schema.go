@@ -11,15 +11,15 @@ var (
 	// StoreBalanceAccountsColumns holds the columns for the "store_balance_accounts" table.
 	StoreBalanceAccountsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint32, Increment: true},
-		{Name: "store_code", Type: field.TypeString},
-		{Name: "upper_organ_no", Type: field.TypeString},
-		{Name: "pwd", Type: field.TypeString},
-		{Name: "pwd_salt", Type: field.TypeString},
-		{Name: "balance_fee", Type: field.TypeFloat64},
-		{Name: "total_charge_fee", Type: field.TypeFloat64},
-		{Name: "is_deleted", Type: field.TypeInt8},
-		{Name: "updated_at", Type: field.TypeTime},
-		{Name: "created_at", Type: field.TypeTime},
+		{Name: "store_code", Type: field.TypeString, Nullable: true},
+		{Name: "upper_organ_no", Type: field.TypeString, Nullable: true},
+		{Name: "pwd", Type: field.TypeString, Nullable: true},
+		{Name: "pwd_salt", Type: field.TypeString, Nullable: true},
+		{Name: "balance_fee", Type: field.TypeFloat64, Nullable: true},
+		{Name: "total_charge_fee", Type: field.TypeFloat64, Nullable: true},
+		{Name: "is_deleted", Type: field.TypeInt8, Nullable: true},
+		{Name: "updated_at", Type: field.TypeTime, Nullable: true},
+		{Name: "created_at", Type: field.TypeTime, Nullable: true},
 	}
 	// StoreBalanceAccountsTable holds the schema information for the "store_balance_accounts" table.
 	StoreBalanceAccountsTable = &schema.Table{

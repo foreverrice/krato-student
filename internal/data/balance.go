@@ -2,9 +2,9 @@ package data
 
 import (
 	"context"
-	"finance/internal/data/ent"
-
 	"finance/internal/biz"
+	"finance/internal/data/ent"
+	"fmt"
 
 	pb "finance/api/finance/v1"
 
@@ -31,15 +31,39 @@ func (r *balanceRepo) Get(ctx context.Context, g *biz.Balance) (*biz.Balance, er
 	return g, nil
 }
 
-func (r *balanceRepo) Create(ctx context.Context, model *pb.AddBalanceAccountModel) *ent.StoreBalanceAccount {
+func (r *balanceRepo) Create(ctx context.Context, model *pb.BalanceAccountModel) (*ent.StoreBalanceAccount, error) {
 	builder := r.data.finance.StoreBalanceAccount.Create()
 	mutation := builder.Mutation()
 	mutationSetBalanceAccount(mutation, model)
-	return &ent.StoreBalanceAccount{}
+	res, e := builder.Save(ctx)
+
+	return res, e
 }
 
-func mutationSetBalanceAccount(mutation *ent.StoreBalanceAccountMutation, model *pb.AddBalanceAccountModel) {
-	/*if model.Pwd != nil {
-		mutation.SetPwd(model.Pwd)
-	}*/
+func mutationSetBalanceAccount(mutation *ent.StoreBalanceAccountMutation, model *pb.BalanceAccountModel) {
+	if model.StoreCode != nil {
+		mutation.SetStoreCode(model.StoreCode.Value)
+	}
+
+	if model.Pwd != nil {
+		fmt.Println("Pwd", model.Pwd.Value)
+		mutation.SetPwd(model.Pwd.Value)
+	}
+
+	if model.PwdSalt != nil {
+		fmt.Println("PwdSalt", model.PwdSalt.Value)
+		mutation.SetPwdSalt(model.PwdSalt.Value)
+	}
+
+	if model.UpperOrganNo != nil {
+		fmt.Println("UpperOrganNo", model.UpperOrganNo.Value)
+		mutation.SetUpperOrganNo(model.UpperOrganNo.Value)
+	}
+
+	if model.BalanceFee != nil {
+		mutation.SetBalanceFee(model.BalanceFee.Value)
+	}
+	if model.TotalChargeFee != nil {
+		mutation.SetTotalChargeFee(model.TotalChargeFee.Value)
+	}
 }

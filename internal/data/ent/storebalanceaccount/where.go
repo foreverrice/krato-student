@@ -228,6 +228,20 @@ func StoreCodeHasSuffix(v string) predicate.StoreBalanceAccount {
 	})
 }
 
+// StoreCodeIsNil applies the IsNil predicate on the "store_code" field.
+func StoreCodeIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldStoreCode)))
+	})
+}
+
+// StoreCodeNotNil applies the NotNil predicate on the "store_code" field.
+func StoreCodeNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldStoreCode)))
+	})
+}
+
 // StoreCodeEqualFold applies the EqualFold predicate on the "store_code" field.
 func StoreCodeEqualFold(v string) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
@@ -324,6 +338,20 @@ func UpperOrganNoHasPrefix(v string) predicate.StoreBalanceAccount {
 func UpperOrganNoHasSuffix(v string) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
 		s.Where(sql.HasSuffix(s.C(FieldUpperOrganNo), v))
+	})
+}
+
+// UpperOrganNoIsNil applies the IsNil predicate on the "upper_organ_no" field.
+func UpperOrganNoIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldUpperOrganNo)))
+	})
+}
+
+// UpperOrganNoNotNil applies the NotNil predicate on the "upper_organ_no" field.
+func UpperOrganNoNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldUpperOrganNo)))
 	})
 }
 
@@ -426,6 +454,20 @@ func PwdHasSuffix(v string) predicate.StoreBalanceAccount {
 	})
 }
 
+// PwdIsNil applies the IsNil predicate on the "pwd" field.
+func PwdIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldPwd)))
+	})
+}
+
+// PwdNotNil applies the NotNil predicate on the "pwd" field.
+func PwdNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldPwd)))
+	})
+}
+
 // PwdEqualFold applies the EqualFold predicate on the "pwd" field.
 func PwdEqualFold(v string) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
@@ -525,6 +567,20 @@ func PwdSaltHasSuffix(v string) predicate.StoreBalanceAccount {
 	})
 }
 
+// PwdSaltIsNil applies the IsNil predicate on the "pwd_salt" field.
+func PwdSaltIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldPwdSalt)))
+	})
+}
+
+// PwdSaltNotNil applies the NotNil predicate on the "pwd_salt" field.
+func PwdSaltNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldPwdSalt)))
+	})
+}
+
 // PwdSaltEqualFold applies the EqualFold predicate on the "pwd_salt" field.
 func PwdSaltEqualFold(v string) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
@@ -603,6 +659,20 @@ func BalanceFeeLTE(v float64) predicate.StoreBalanceAccount {
 	})
 }
 
+// BalanceFeeIsNil applies the IsNil predicate on the "balance_fee" field.
+func BalanceFeeIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldBalanceFee)))
+	})
+}
+
+// BalanceFeeNotNil applies the NotNil predicate on the "balance_fee" field.
+func BalanceFeeNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldBalanceFee)))
+	})
+}
+
 // TotalChargeFeeEQ applies the EQ predicate on the "total_charge_fee" field.
 func TotalChargeFeeEQ(v float64) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
@@ -664,6 +734,20 @@ func TotalChargeFeeLT(v float64) predicate.StoreBalanceAccount {
 func TotalChargeFeeLTE(v float64) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
 		s.Where(sql.LTE(s.C(FieldTotalChargeFee), v))
+	})
+}
+
+// TotalChargeFeeIsNil applies the IsNil predicate on the "total_charge_fee" field.
+func TotalChargeFeeIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldTotalChargeFee)))
+	})
+}
+
+// TotalChargeFeeNotNil applies the NotNil predicate on the "total_charge_fee" field.
+func TotalChargeFeeNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldTotalChargeFee)))
 	})
 }
 
@@ -731,6 +815,20 @@ func IsDeletedLTE(v int8) predicate.StoreBalanceAccount {
 	})
 }
 
+// IsDeletedIsNil applies the IsNil predicate on the "is_deleted" field.
+func IsDeletedIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldIsDeleted)))
+	})
+}
+
+// IsDeletedNotNil applies the NotNil predicate on the "is_deleted" field.
+func IsDeletedNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldIsDeleted)))
+	})
+}
+
 // UpdatedAtEQ applies the EQ predicate on the "updated_at" field.
 func UpdatedAtEQ(v time.Time) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
@@ -795,6 +893,20 @@ func UpdatedAtLTE(v time.Time) predicate.StoreBalanceAccount {
 	})
 }
 
+// UpdatedAtIsNil applies the IsNil predicate on the "updated_at" field.
+func UpdatedAtIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldUpdatedAt)))
+	})
+}
+
+// UpdatedAtNotNil applies the NotNil predicate on the "updated_at" field.
+func UpdatedAtNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldUpdatedAt)))
+	})
+}
+
 // CreatedAtEQ applies the EQ predicate on the "created_at" field.
 func CreatedAtEQ(v time.Time) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
@@ -856,6 +968,20 @@ func CreatedAtLT(v time.Time) predicate.StoreBalanceAccount {
 func CreatedAtLTE(v time.Time) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
 		s.Where(sql.LTE(s.C(FieldCreatedAt), v))
+	})
+}
+
+// CreatedAtIsNil applies the IsNil predicate on the "created_at" field.
+func CreatedAtIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldCreatedAt)))
+	})
+}
+
+// CreatedAtNotNil applies the NotNil predicate on the "created_at" field.
+func CreatedAtNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldCreatedAt)))
 	})
 }
 

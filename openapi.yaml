@@ -46,15 +46,13 @@ components:
         api.finance.v1.AddBalanceAccountDetailReq:
             type: object
             properties:
-                upperOrganNo:
-                    type: string
-                    description: 加盟商编码
                 storeCode:
-                    type: string
-                    description: 门店编码
+                    $ref: '#/components/schemas/google.protobuf.StringValue'
+                upperOrganNo:
+                    $ref: '#/components/schemas/google.protobuf.StringValue'
                 pwd:
-                    type: string
-                    description: 密码
+                    $ref: '#/components/schemas/google.protobuf.StringValue'
+            description: message AddBalanceAccountDetailReq {// 加盟商编码string upper_organ_no = 2;// 门店编码string store_code = 1;// 密码string pwd = 3;}
         api.finance.v1.AddBalanceAccountResp:
             type: object
             properties:
@@ -66,5 +64,12 @@ components:
             properties:
                 message:
                     type: string
+        google.protobuf.StringValue:
+            type: object
+            properties:
+                value:
+                    type: string
+                    description: The string value.
+            description: Wrapper message for `string`. The JSON representation for `StringValue` is JSON string.
 tags:
     - name: Balance

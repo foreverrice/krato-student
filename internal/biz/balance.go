@@ -2,8 +2,13 @@ package biz
 
 import (
 	"context"
+	"crypto/md5"
 	pb "finance/api/finance/v1"
 	"finance/internal/data/ent"
+	"finance/internal/util"
+	"fmt"
+
+	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
@@ -37,7 +42,7 @@ type BalanceAccountAdd struct {
 type BalanceRepo interface {
 	Save(context.Context, *Balance) (*Balance, error)
 	Get(context.Context, *Balance) (*Balance, error)
-	Create(context.Context, *pb.AddBalanceAccountModel) *ent.StoreBalanceAccount
+	Create(context.Context, *pb.BalanceAccountModel) (*ent.StoreBalanceAccount, error)
 }
 
 // BalanceUsecase is a Greeter usecase.
@@ -53,19 +58,52 @@ func NewBalanceUsecase(repo BalanceRepo, logger log.Logger) *BalanceUsecase {
 
 // AddBalanceAccount 新增余额账户
 func (uc *BalanceUsecase) AddBalanceAccount(ctx context.Context, req *pb.AddBalanceAccountReq) (*pb.AddBalanceAccountResp, error) {
-	// s0: TODO 参数校验
+	// s0: valid params
+	checkErr := CheckAddBalanceAccount(req)
+	if checkErr != nil {
+		return nil, checkErr
+	}
 
 	// s1: format create info
-	//salt := util.RandLowStr(4)
-	//pwd := fmt.Sprintf("%x", md5.Sum([]byte(req.AccountInfo.Pwd+salt)))
-	/*balanceAccount := &BalanceAccountAdd{
+	salt := util.RandLowStr(4)
+	pwd := fmt.Sprintf("%x", md5.Sum([]byte(req.AccountInfo.GetPwd().Value+salt)))
+	balanceAccount := &pb.BalanceAccountModel{
 		StoreCode:    req.AccountInfo.StoreCode,
 		UpperOrganNo: req.AccountInfo.UpperOrganNo,
-		Pwd:          pwd,
-		Salt:         salt,
-	}*/
+		Pwd:          wrapperspb.String(pwd),
+		PwdSalt:      wrapperspb.String(salt),
+	}
 
 	// s2 : create action
-	uc.repo.Create(ctx, &pb.AddBalanceAccountModel{})
-	return &pb.AddBalanceAccountResp{}, nil
+	balanceAccountEntity, err := uc.repo.Create(ctx, balanceAccount)
+	if err != nil {
+		return nil, util.HttpErr500("开通失败", nil)
+	}
+
+	// s3: format res
+	res := &pb.AddBalanceAccountResp{
+		Id: int32(balanceAccountEntity.ID),
+	}
+
+	return res, nil
+}
+
+// CheckAddBalanceAccount valid AddBalanceAccount
+func CheckAddBalanceAccount(req *pb.AddBalanceAccountReq) error {
+	if req.AccountInfo.StoreCode == nil {
+		return util.HttpErr422("未知门店编码")
+	}
+
+	if req.AccountInfo.UpperOrganNo == nil {
+		return util.HttpErr422("未知上级机构")
+	}
+
+	if req.AccountInfo.Pwd == nil {
+		return util.HttpErr422("请填写密码")
+	}
+
+	if len(req.AccountInfo.Pwd.Value) != 6 {
+		return util.HttpErr422("必须6位密码")
+	}
+	return nil
 }

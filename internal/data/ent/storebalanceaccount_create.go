@@ -4,7 +4,6 @@ package ent
 
 import (
 	"context"
-	"errors"
 	"finance/internal/data/ent/storebalanceaccount"
 	"fmt"
 	"time"
@@ -26,9 +25,25 @@ func (sbac *StoreBalanceAccountCreate) SetStoreCode(s string) *StoreBalanceAccou
 	return sbac
 }
 
+// SetNillableStoreCode sets the "store_code" field if the given value is not nil.
+func (sbac *StoreBalanceAccountCreate) SetNillableStoreCode(s *string) *StoreBalanceAccountCreate {
+	if s != nil {
+		sbac.SetStoreCode(*s)
+	}
+	return sbac
+}
+
 // SetUpperOrganNo sets the "upper_organ_no" field.
 func (sbac *StoreBalanceAccountCreate) SetUpperOrganNo(s string) *StoreBalanceAccountCreate {
 	sbac.mutation.SetUpperOrganNo(s)
+	return sbac
+}
+
+// SetNillableUpperOrganNo sets the "upper_organ_no" field if the given value is not nil.
+func (sbac *StoreBalanceAccountCreate) SetNillableUpperOrganNo(s *string) *StoreBalanceAccountCreate {
+	if s != nil {
+		sbac.SetUpperOrganNo(*s)
+	}
 	return sbac
 }
 
@@ -38,9 +53,25 @@ func (sbac *StoreBalanceAccountCreate) SetPwd(s string) *StoreBalanceAccountCrea
 	return sbac
 }
 
+// SetNillablePwd sets the "pwd" field if the given value is not nil.
+func (sbac *StoreBalanceAccountCreate) SetNillablePwd(s *string) *StoreBalanceAccountCreate {
+	if s != nil {
+		sbac.SetPwd(*s)
+	}
+	return sbac
+}
+
 // SetPwdSalt sets the "pwd_salt" field.
 func (sbac *StoreBalanceAccountCreate) SetPwdSalt(s string) *StoreBalanceAccountCreate {
 	sbac.mutation.SetPwdSalt(s)
+	return sbac
+}
+
+// SetNillablePwdSalt sets the "pwd_salt" field if the given value is not nil.
+func (sbac *StoreBalanceAccountCreate) SetNillablePwdSalt(s *string) *StoreBalanceAccountCreate {
+	if s != nil {
+		sbac.SetPwdSalt(*s)
+	}
 	return sbac
 }
 
@@ -50,9 +81,25 @@ func (sbac *StoreBalanceAccountCreate) SetBalanceFee(f float64) *StoreBalanceAcc
 	return sbac
 }
 
+// SetNillableBalanceFee sets the "balance_fee" field if the given value is not nil.
+func (sbac *StoreBalanceAccountCreate) SetNillableBalanceFee(f *float64) *StoreBalanceAccountCreate {
+	if f != nil {
+		sbac.SetBalanceFee(*f)
+	}
+	return sbac
+}
+
 // SetTotalChargeFee sets the "total_charge_fee" field.
 func (sbac *StoreBalanceAccountCreate) SetTotalChargeFee(f float64) *StoreBalanceAccountCreate {
 	sbac.mutation.SetTotalChargeFee(f)
+	return sbac
+}
+
+// SetNillableTotalChargeFee sets the "total_charge_fee" field if the given value is not nil.
+func (sbac *StoreBalanceAccountCreate) SetNillableTotalChargeFee(f *float64) *StoreBalanceAccountCreate {
+	if f != nil {
+		sbac.SetTotalChargeFee(*f)
+	}
 	return sbac
 }
 
@@ -62,15 +109,39 @@ func (sbac *StoreBalanceAccountCreate) SetIsDeleted(i int8) *StoreBalanceAccount
 	return sbac
 }
 
+// SetNillableIsDeleted sets the "is_deleted" field if the given value is not nil.
+func (sbac *StoreBalanceAccountCreate) SetNillableIsDeleted(i *int8) *StoreBalanceAccountCreate {
+	if i != nil {
+		sbac.SetIsDeleted(*i)
+	}
+	return sbac
+}
+
 // SetUpdatedAt sets the "updated_at" field.
 func (sbac *StoreBalanceAccountCreate) SetUpdatedAt(t time.Time) *StoreBalanceAccountCreate {
 	sbac.mutation.SetUpdatedAt(t)
 	return sbac
 }
 
+// SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
+func (sbac *StoreBalanceAccountCreate) SetNillableUpdatedAt(t *time.Time) *StoreBalanceAccountCreate {
+	if t != nil {
+		sbac.SetUpdatedAt(*t)
+	}
+	return sbac
+}
+
 // SetCreatedAt sets the "created_at" field.
 func (sbac *StoreBalanceAccountCreate) SetCreatedAt(t time.Time) *StoreBalanceAccountCreate {
 	sbac.mutation.SetCreatedAt(t)
+	return sbac
+}
+
+// SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
+func (sbac *StoreBalanceAccountCreate) SetNillableCreatedAt(t *time.Time) *StoreBalanceAccountCreate {
+	if t != nil {
+		sbac.SetCreatedAt(*t)
+	}
 	return sbac
 }
 
@@ -156,33 +227,6 @@ func (sbac *StoreBalanceAccountCreate) ExecX(ctx context.Context) {
 
 // check runs all checks and user-defined validators on the builder.
 func (sbac *StoreBalanceAccountCreate) check() error {
-	if _, ok := sbac.mutation.StoreCode(); !ok {
-		return &ValidationError{Name: "store_code", err: errors.New(`ent: missing required field "StoreBalanceAccount.store_code"`)}
-	}
-	if _, ok := sbac.mutation.UpperOrganNo(); !ok {
-		return &ValidationError{Name: "upper_organ_no", err: errors.New(`ent: missing required field "StoreBalanceAccount.upper_organ_no"`)}
-	}
-	if _, ok := sbac.mutation.Pwd(); !ok {
-		return &ValidationError{Name: "pwd", err: errors.New(`ent: missing required field "StoreBalanceAccount.pwd"`)}
-	}
-	if _, ok := sbac.mutation.PwdSalt(); !ok {
-		return &ValidationError{Name: "pwd_salt", err: errors.New(`ent: missing required field "StoreBalanceAccount.pwd_salt"`)}
-	}
-	if _, ok := sbac.mutation.BalanceFee(); !ok {
-		return &ValidationError{Name: "balance_fee", err: errors.New(`ent: missing required field "StoreBalanceAccount.balance_fee"`)}
-	}
-	if _, ok := sbac.mutation.TotalChargeFee(); !ok {
-		return &ValidationError{Name: "total_charge_fee", err: errors.New(`ent: missing required field "StoreBalanceAccount.total_charge_fee"`)}
-	}
-	if _, ok := sbac.mutation.IsDeleted(); !ok {
-		return &ValidationError{Name: "is_deleted", err: errors.New(`ent: missing required field "StoreBalanceAccount.is_deleted"`)}
-	}
-	if _, ok := sbac.mutation.UpdatedAt(); !ok {
-		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "StoreBalanceAccount.updated_at"`)}
-	}
-	if _, ok := sbac.mutation.CreatedAt(); !ok {
-		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "StoreBalanceAccount.created_at"`)}
-	}
 	return nil
 }
 

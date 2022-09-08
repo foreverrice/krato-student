@@ -187,9 +187,22 @@ func (m *StoreBalanceAccountMutation) OldStoreCode(ctx context.Context) (v strin
 	return oldValue.StoreCode, nil
 }
 
+// ClearStoreCode clears the value of the "store_code" field.
+func (m *StoreBalanceAccountMutation) ClearStoreCode() {
+	m.store_code = nil
+	m.clearedFields[storebalanceaccount.FieldStoreCode] = struct{}{}
+}
+
+// StoreCodeCleared returns if the "store_code" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) StoreCodeCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldStoreCode]
+	return ok
+}
+
 // ResetStoreCode resets all changes to the "store_code" field.
 func (m *StoreBalanceAccountMutation) ResetStoreCode() {
 	m.store_code = nil
+	delete(m.clearedFields, storebalanceaccount.FieldStoreCode)
 }
 
 // SetUpperOrganNo sets the "upper_organ_no" field.
@@ -223,9 +236,22 @@ func (m *StoreBalanceAccountMutation) OldUpperOrganNo(ctx context.Context) (v st
 	return oldValue.UpperOrganNo, nil
 }
 
+// ClearUpperOrganNo clears the value of the "upper_organ_no" field.
+func (m *StoreBalanceAccountMutation) ClearUpperOrganNo() {
+	m.upper_organ_no = nil
+	m.clearedFields[storebalanceaccount.FieldUpperOrganNo] = struct{}{}
+}
+
+// UpperOrganNoCleared returns if the "upper_organ_no" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) UpperOrganNoCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldUpperOrganNo]
+	return ok
+}
+
 // ResetUpperOrganNo resets all changes to the "upper_organ_no" field.
 func (m *StoreBalanceAccountMutation) ResetUpperOrganNo() {
 	m.upper_organ_no = nil
+	delete(m.clearedFields, storebalanceaccount.FieldUpperOrganNo)
 }
 
 // SetPwd sets the "pwd" field.
@@ -259,9 +285,22 @@ func (m *StoreBalanceAccountMutation) OldPwd(ctx context.Context) (v string, err
 	return oldValue.Pwd, nil
 }
 
+// ClearPwd clears the value of the "pwd" field.
+func (m *StoreBalanceAccountMutation) ClearPwd() {
+	m.pwd = nil
+	m.clearedFields[storebalanceaccount.FieldPwd] = struct{}{}
+}
+
+// PwdCleared returns if the "pwd" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) PwdCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldPwd]
+	return ok
+}
+
 // ResetPwd resets all changes to the "pwd" field.
 func (m *StoreBalanceAccountMutation) ResetPwd() {
 	m.pwd = nil
+	delete(m.clearedFields, storebalanceaccount.FieldPwd)
 }
 
 // SetPwdSalt sets the "pwd_salt" field.
@@ -295,9 +334,22 @@ func (m *StoreBalanceAccountMutation) OldPwdSalt(ctx context.Context) (v string,
 	return oldValue.PwdSalt, nil
 }
 
+// ClearPwdSalt clears the value of the "pwd_salt" field.
+func (m *StoreBalanceAccountMutation) ClearPwdSalt() {
+	m.pwd_salt = nil
+	m.clearedFields[storebalanceaccount.FieldPwdSalt] = struct{}{}
+}
+
+// PwdSaltCleared returns if the "pwd_salt" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) PwdSaltCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldPwdSalt]
+	return ok
+}
+
 // ResetPwdSalt resets all changes to the "pwd_salt" field.
 func (m *StoreBalanceAccountMutation) ResetPwdSalt() {
 	m.pwd_salt = nil
+	delete(m.clearedFields, storebalanceaccount.FieldPwdSalt)
 }
 
 // SetBalanceFee sets the "balance_fee" field.
@@ -350,10 +402,24 @@ func (m *StoreBalanceAccountMutation) AddedBalanceFee() (r float64, exists bool)
 	return *v, true
 }
 
+// ClearBalanceFee clears the value of the "balance_fee" field.
+func (m *StoreBalanceAccountMutation) ClearBalanceFee() {
+	m.balance_fee = nil
+	m.addbalance_fee = nil
+	m.clearedFields[storebalanceaccount.FieldBalanceFee] = struct{}{}
+}
+
+// BalanceFeeCleared returns if the "balance_fee" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) BalanceFeeCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldBalanceFee]
+	return ok
+}
+
 // ResetBalanceFee resets all changes to the "balance_fee" field.
 func (m *StoreBalanceAccountMutation) ResetBalanceFee() {
 	m.balance_fee = nil
 	m.addbalance_fee = nil
+	delete(m.clearedFields, storebalanceaccount.FieldBalanceFee)
 }
 
 // SetTotalChargeFee sets the "total_charge_fee" field.
@@ -406,10 +472,24 @@ func (m *StoreBalanceAccountMutation) AddedTotalChargeFee() (r float64, exists b
 	return *v, true
 }
 
+// ClearTotalChargeFee clears the value of the "total_charge_fee" field.
+func (m *StoreBalanceAccountMutation) ClearTotalChargeFee() {
+	m.total_charge_fee = nil
+	m.addtotal_charge_fee = nil
+	m.clearedFields[storebalanceaccount.FieldTotalChargeFee] = struct{}{}
+}
+
+// TotalChargeFeeCleared returns if the "total_charge_fee" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) TotalChargeFeeCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldTotalChargeFee]
+	return ok
+}
+
 // ResetTotalChargeFee resets all changes to the "total_charge_fee" field.
 func (m *StoreBalanceAccountMutation) ResetTotalChargeFee() {
 	m.total_charge_fee = nil
 	m.addtotal_charge_fee = nil
+	delete(m.clearedFields, storebalanceaccount.FieldTotalChargeFee)
 }
 
 // SetIsDeleted sets the "is_deleted" field.
@@ -462,10 +542,24 @@ func (m *StoreBalanceAccountMutation) AddedIsDeleted() (r int8, exists bool) {
 	return *v, true
 }
 
+// ClearIsDeleted clears the value of the "is_deleted" field.
+func (m *StoreBalanceAccountMutation) ClearIsDeleted() {
+	m.is_deleted = nil
+	m.addis_deleted = nil
+	m.clearedFields[storebalanceaccount.FieldIsDeleted] = struct{}{}
+}
+
+// IsDeletedCleared returns if the "is_deleted" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) IsDeletedCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldIsDeleted]
+	return ok
+}
+
 // ResetIsDeleted resets all changes to the "is_deleted" field.
 func (m *StoreBalanceAccountMutation) ResetIsDeleted() {
 	m.is_deleted = nil
 	m.addis_deleted = nil
+	delete(m.clearedFields, storebalanceaccount.FieldIsDeleted)
 }
 
 // SetUpdatedAt sets the "updated_at" field.
@@ -499,9 +593,22 @@ func (m *StoreBalanceAccountMutation) OldUpdatedAt(ctx context.Context) (v time.
 	return oldValue.UpdatedAt, nil
 }
 
+// ClearUpdatedAt clears the value of the "updated_at" field.
+func (m *StoreBalanceAccountMutation) ClearUpdatedAt() {
+	m.updated_at = nil
+	m.clearedFields[storebalanceaccount.FieldUpdatedAt] = struct{}{}
+}
+
+// UpdatedAtCleared returns if the "updated_at" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) UpdatedAtCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldUpdatedAt]
+	return ok
+}
+
 // ResetUpdatedAt resets all changes to the "updated_at" field.
 func (m *StoreBalanceAccountMutation) ResetUpdatedAt() {
 	m.updated_at = nil
+	delete(m.clearedFields, storebalanceaccount.FieldUpdatedAt)
 }
 
 // SetCreatedAt sets the "created_at" field.
@@ -535,9 +642,22 @@ func (m *StoreBalanceAccountMutation) OldCreatedAt(ctx context.Context) (v time.
 	return oldValue.CreatedAt, nil
 }
 
+// ClearCreatedAt clears the value of the "created_at" field.
+func (m *StoreBalanceAccountMutation) ClearCreatedAt() {
+	m.created_at = nil
+	m.clearedFields[storebalanceaccount.FieldCreatedAt] = struct{}{}
+}
+
+// CreatedAtCleared returns if the "created_at" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) CreatedAtCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldCreatedAt]
+	return ok
+}
+
 // ResetCreatedAt resets all changes to the "created_at" field.
 func (m *StoreBalanceAccountMutation) ResetCreatedAt() {
 	m.created_at = nil
+	delete(m.clearedFields, storebalanceaccount.FieldCreatedAt)
 }
 
 // Where appends a list predicates to the StoreBalanceAccountMutation builder.
@@ -780,7 +900,35 @@ func (m *StoreBalanceAccountMutation) AddField(name string, value ent.Value) err
 // ClearedFields returns all nullable fields that were cleared during this
 // mutation.
 func (m *StoreBalanceAccountMutation) ClearedFields() []string {
-	return nil
+	var fields []string
+	if m.FieldCleared(storebalanceaccount.FieldStoreCode) {
+		fields = append(fields, storebalanceaccount.FieldStoreCode)
+	}
+	if m.FieldCleared(storebalanceaccount.FieldUpperOrganNo) {
+		fields = append(fields, storebalanceaccount.FieldUpperOrganNo)
+	}
+	if m.FieldCleared(storebalanceaccount.FieldPwd) {
+		fields = append(fields, storebalanceaccount.FieldPwd)
+	}
+	if m.FieldCleared(storebalanceaccount.FieldPwdSalt) {
+		fields = append(fields, storebalanceaccount.FieldPwdSalt)
+	}
+	if m.FieldCleared(storebalanceaccount.FieldBalanceFee) {
+		fields = append(fields, storebalanceaccount.FieldBalanceFee)
+	}
+	if m.FieldCleared(storebalanceaccount.FieldTotalChargeFee) {
+		fields = append(fields, storebalanceaccount.FieldTotalChargeFee)
+	}
+	if m.FieldCleared(storebalanceaccount.FieldIsDeleted) {
+		fields = append(fields, storebalanceaccount.FieldIsDeleted)
+	}
+	if m.FieldCleared(storebalanceaccount.FieldUpdatedAt) {
+		fields = append(fields, storebalanceaccount.FieldUpdatedAt)
+	}
+	if m.FieldCleared(storebalanceaccount.FieldCreatedAt) {
+		fields = append(fields, storebalanceaccount.FieldCreatedAt)
+	}
+	return fields
 }
 
 // FieldCleared returns a boolean indicating if a field with the given name was
@@ -793,6 +941,35 @@ func (m *StoreBalanceAccountMutation) FieldCleared(name string) bool {
 // ClearField clears the value of the field with the given name. It returns an
 // error if the field is not defined in the schema.
 func (m *StoreBalanceAccountMutation) ClearField(name string) error {
+	switch name {
+	case storebalanceaccount.FieldStoreCode:
+		m.ClearStoreCode()
+		return nil
+	case storebalanceaccount.FieldUpperOrganNo:
+		m.ClearUpperOrganNo()
+		return nil
+	case storebalanceaccount.FieldPwd:
+		m.ClearPwd()
+		return nil
+	case storebalanceaccount.FieldPwdSalt:
+		m.ClearPwdSalt()
+		return nil
+	case storebalanceaccount.FieldBalanceFee:
+		m.ClearBalanceFee()
+		return nil
+	case storebalanceaccount.FieldTotalChargeFee:
+		m.ClearTotalChargeFee()
+		return nil
+	case storebalanceaccount.FieldIsDeleted:
+		m.ClearIsDeleted()
+		return nil
+	case storebalanceaccount.FieldUpdatedAt:
+		m.ClearUpdatedAt()
+		return nil
+	case storebalanceaccount.FieldCreatedAt:
+		m.ClearCreatedAt()
+		return nil
+	}
 	return fmt.Errorf("unknown StoreBalanceAccount nullable field %s", name)
 }
 

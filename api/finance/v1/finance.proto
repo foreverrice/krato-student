@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package api.finance.v1;
 import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
 option go_package = "/api/finance/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.finance.v1";
@@ -27,13 +28,21 @@ message BalanceDetailResp {
 	string message = 1;
 }
 
-message AddBalanceAccountDetailReq {
+/*message AddBalanceAccountDetailReq {
 	// 加盟商编码
 	string upper_organ_no = 2;
 	// 门店编码
 	string store_code = 1;
 	// 密码
 	string pwd = 3;
+}*/
+message AddBalanceAccountDetailReq {
+	// 门店编码
+	google.protobuf.StringValue store_code = 1;
+	// 加盟商编码
+	google.protobuf.StringValue upper_organ_no = 2;
+	// 密码
+	google.protobuf.StringValue pwd = 3;
 }
 message AddBalanceAccountReq {
 	AddBalanceAccountDetailReq account_info = 1;
@@ -43,8 +52,13 @@ message AddBalanceAccountResp {
 	int32 id = 1;
 }
 // 新增余额账户model
-message AddBalanceAccountModel {
-	string storeCode = 1;
-	string upperOrganNo = 2;
-	string pwd = 3;
+message BalanceAccountModel {
+	google.protobuf.UInt64Value id = 1;
+	google.protobuf.StringValue storeCode = 2;
+	google.protobuf.StringValue upperOrganNo = 3;
+	google.protobuf.StringValue pwd = 4;
+	google.protobuf.StringValue pwdSalt = 5;
+	google.protobuf.DoubleValue balanceFee = 6;
+	google.protobuf.DoubleValue totalChargeFee = 7;
+	google.protobuf.Int32Value isDeleted = 8;
 }
