@@ -3,8 +3,68 @@
 
 openapi: 3.0.3
 info:
-    title: ""
+    title: Balance API
     version: 0.0.1
-paths: {}
+paths:
+    balance/account/add:
+        post:
+            tags:
+                - Balance
+            operationId: Balance_AddBalanceAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.finance.v1.AddBalanceAccountDetailReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.finance.v1.AddBalanceAccountResp'
+    balance/add/batch/detail:
+        get:
+            tags:
+                - Balance
+            operationId: Balance_AddBatchBalanceDetail
+            parameters:
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.finance.v1.BalanceDetailResp'
 components:
-    schemas: {}
+    schemas:
+        api.finance.v1.AddBalanceAccountDetailReq:
+            type: object
+            properties:
+                upperOrganNo:
+                    type: string
+                    description: 加盟商编码
+                storeCode:
+                    type: string
+                    description: 门店编码
+                pwd:
+                    type: string
+                    description: 密码
+        api.finance.v1.AddBalanceAccountResp:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+        api.finance.v1.BalanceDetailResp:
+            type: object
+            properties:
+                message:
+                    type: string
+tags:
+    - name: Balance

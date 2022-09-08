@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.13.0
-// source: api/finance/v1/finance.proto
+// source: finance/v1/finance.proto
 
 package v1
 
@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BalanceClient interface {
+	AddBalanceAccount(ctx context.Context, in *AddBalanceAccountReq, opts ...grpc.CallOption) (*AddBalanceAccountResp, error)
 	AddBatchBalanceDetail(ctx context.Context, in *BalanceDetailReq, opts ...grpc.CallOption) (*BalanceDetailResp, error)
 }
 
@@ -31,6 +32,15 @@ type balanceClient struct {
 
 func NewBalanceClient(cc grpc.ClientConnInterface) BalanceClient {
 	return &balanceClient{cc}
+}
+
+func (c *balanceClient) AddBalanceAccount(ctx context.Context, in *AddBalanceAccountReq, opts ...grpc.CallOption) (*AddBalanceAccountResp, error) {
+	out := new(AddBalanceAccountResp)
+	err := c.cc.Invoke(ctx, "/api.finance.v1.Balance/AddBalanceAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *balanceClient) AddBatchBalanceDetail(ctx context.Context, in *BalanceDetailReq, opts ...grpc.CallOption) (*BalanceDetailResp, error) {
@@ -46,6 +56,7 @@ func (c *balanceClient) AddBatchBalanceDetail(ctx context.Context, in *BalanceDe
 // All implementations must embed UnimplementedBalanceServer
 // for forward compatibility
 type BalanceServer interface {
+	AddBalanceAccount(context.Context, *AddBalanceAccountReq) (*AddBalanceAccountResp, error)
 	AddBatchBalanceDetail(context.Context, *BalanceDetailReq) (*BalanceDetailResp, error)
 	mustEmbedUnimplementedBalanceServer()
 }
@@ -54,6 +65,9 @@ type BalanceServer interface {
 type UnimplementedBalanceServer struct {
 }
 
+func (UnimplementedBalanceServer) AddBalanceAccount(context.Context, *AddBalanceAccountReq) (*AddBalanceAccountResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddBalanceAccount not implemented")
+}
 func (UnimplementedBalanceServer) AddBatchBalanceDetail(context.Context, *BalanceDetailReq) (*BalanceDetailResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddBatchBalanceDetail not implemented")
 }
@@ -68,6 +82,24 @@ type UnsafeBalanceServer interface {
 
 func RegisterBalanceServer(s grpc.ServiceRegistrar, srv BalanceServer) {
 	s.RegisterService(&Balance_ServiceDesc, srv)
+}
+
+func _Balance_AddBalanceAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddBalanceAccountReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BalanceServer).AddBalanceAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.finance.v1.Balance/AddBalanceAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BalanceServer).AddBalanceAccount(ctx, req.(*AddBalanceAccountReq))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Balance_AddBatchBalanceDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -96,10 +128,14 @@ var Balance_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BalanceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "AddBalanceAccount",
+			Handler:    _Balance_AddBalanceAccount_Handler,
+		},
+		{
 			MethodName: "AddBatchBalanceDetail",
 			Handler:    _Balance_AddBatchBalanceDetail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/finance/v1/finance.proto",
+	Metadata: "finance/v1/finance.proto",
 }

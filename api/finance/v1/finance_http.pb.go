@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.5.0
 // - protoc             v3.13.0
-// source: api/finance/v1/finance.proto
+// source: finance/v1/finance.proto
 
 package v1
 
@@ -19,15 +19,40 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBalanceAddBalanceAccount = "/api.finance.v1.Balance/AddBalanceAccount"
 const OperationBalanceAddBatchBalanceDetail = "/api.finance.v1.Balance/AddBatchBalanceDetail"
 
 type BalanceHTTPServer interface {
+	AddBalanceAccount(context.Context, *AddBalanceAccountReq) (*AddBalanceAccountResp, error)
 	AddBatchBalanceDetail(context.Context, *BalanceDetailReq) (*BalanceDetailResp, error)
 }
 
 func RegisterBalanceHTTPServer(s *http.Server, srv BalanceHTTPServer) {
 	r := s.Route("/")
+	r.POST("balance/account/add", _Balance_AddBalanceAccount0_HTTP_Handler(srv))
 	r.GET("balance/add/batch/detail", _Balance_AddBatchBalanceDetail0_HTTP_Handler(srv))
+}
+
+func _Balance_AddBalanceAccount0_HTTP_Handler(srv BalanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddBalanceAccountReq
+		if err := ctx.Bind(&in.AccountInfo); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBalanceAddBalanceAccount)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddBalanceAccount(ctx, req.(*AddBalanceAccountReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AddBalanceAccountResp)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _Balance_AddBatchBalanceDetail0_HTTP_Handler(srv BalanceHTTPServer) func(ctx http.Context) error {
@@ -50,6 +75,7 @@ func _Balance_AddBatchBalanceDetail0_HTTP_Handler(srv BalanceHTTPServer) func(ct
 }
 
 type BalanceHTTPClient interface {
+	AddBalanceAccount(ctx context.Context, req *AddBalanceAccountReq, opts ...http.CallOption) (rsp *AddBalanceAccountResp, err error)
 	AddBatchBalanceDetail(ctx context.Context, req *BalanceDetailReq, opts ...http.CallOption) (rsp *BalanceDetailResp, err error)
 }
 
@@ -59,6 +85,19 @@ type BalanceHTTPClientImpl struct {
 
 func NewBalanceHTTPClient(client *http.Client) BalanceHTTPClient {
 	return &BalanceHTTPClientImpl{client}
+}
+
+func (c *BalanceHTTPClientImpl) AddBalanceAccount(ctx context.Context, in *AddBalanceAccountReq, opts ...http.CallOption) (*AddBalanceAccountResp, error) {
+	var out AddBalanceAccountResp
+	pattern := "balance/account/add"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBalanceAddBalanceAccount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in.AccountInfo, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
 }
 
 func (c *BalanceHTTPClientImpl) AddBatchBalanceDetail(ctx context.Context, in *BalanceDetailReq, opts ...http.CallOption) (*BalanceDetailResp, error) {

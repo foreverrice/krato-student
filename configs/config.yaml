@@ -8,8 +8,8 @@ server:
 data:
   database:
     driver: mysql
-    #source: sweet7_dev:xnFJUsQolb30ySCW@tcp(rm-uf6d1eu3gq468do4zeo.mysql.rds.aliyuncs.com:3306)/scm_order_center?charset=utf8mb4&parseTime=True&loc=Local
-    source: root:cctv1164@tcp(localhost:3306)/finance_center?charset=utf8mb4&parseTime=True&loc=Local
+    source: sweet7_dev:xnFJUsQolb30ySCW@tcp(rm-uf6d1eu3gq468do4zeo.mysql.rds.aliyuncs.com:3306)/finance_center?charset=utf8mb4&parseTime=True&loc=Local
+    #source: root:cctv1164@tcp(localhost:3306)/finance_center?charset=utf8mb4&parseTime=True&loc=Local
   redis:
     addr: r-uf6z5e5fem3edrw7lwpd.redis.rds.aliyuncs.com:6379
     read_timeout: 2s

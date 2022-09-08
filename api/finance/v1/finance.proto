@@ -7,6 +7,12 @@ option java_multiple_files = true;
 option java_package = "api.finance.v1";
 
 service Balance {
+	rpc AddBalanceAccount(AddBalanceAccountReq) returns (AddBalanceAccountResp) {
+		option (google.api.http) = {
+			post: "balance/account/add"
+			body: "account_info"
+		};
+	}
 	rpc AddBatchBalanceDetail (BalanceDetailReq) returns (BalanceDetailResp) {
 		option (google.api.http) = {
 			get: "balance/add/batch/detail"
@@ -19,4 +25,26 @@ message BalanceDetailReq {
 }
 message BalanceDetailResp {
 	string message = 1;
+}
+
+message AddBalanceAccountDetailReq {
+	// 加盟商编码
+	string upper_organ_no = 2;
+	// 门店编码
+	string store_code = 1;
+	// 密码
+	string pwd = 3;
+}
+message AddBalanceAccountReq {
+	AddBalanceAccountDetailReq account_info = 1;
+}
+
+message AddBalanceAccountResp {
+	int32 id = 1;
+}
+// 新增余额账户model
+message AddBalanceAccountModel {
+	string storeCode = 1;
+	string upperOrganNo = 2;
+	string pwd = 3;
 }

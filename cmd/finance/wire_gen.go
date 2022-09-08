@@ -10,11 +10,8 @@ import (
 	"finance/internal/biz"
 	"finance/internal/conf"
 	"finance/internal/data"
-
-	// "finance/internal/data"
 	"finance/internal/server"
 	"finance/internal/service"
-
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 )
@@ -23,16 +20,14 @@ import (
 
 // wireApp init kratos application.
 func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
-	dataData, cleanup, err := data.NewData(confData, logger)
+	client := data.NewCartClient(confData, logger)
+	dataData, cleanup, err := data.NewData(confData, client, logger)
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// balance
 	balanceRepo := data.NewBalanceRepo(dataData, logger)
 	balanceUsecase := biz.NewBalanceUsecase(balanceRepo, logger)
 	balanceService := service.NewBalanceService(balanceUsecase)
-
 	grpcServer := server.NewGRPCServer(confServer, balanceService, logger)
 	httpServer := server.NewHTTPServer(confServer, balanceService, logger)
 	app := newApp(logger, grpcServer, httpServer)
