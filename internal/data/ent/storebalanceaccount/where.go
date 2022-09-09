@@ -1013,6 +1013,20 @@ func UpdatedAtLTE(v time.Time) predicate.StoreBalanceAccount {
 	})
 }
 
+// UpdatedAtIsNil applies the IsNil predicate on the "updated_at" field.
+func UpdatedAtIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldUpdatedAt)))
+	})
+}
+
+// UpdatedAtNotNil applies the NotNil predicate on the "updated_at" field.
+func UpdatedAtNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldUpdatedAt)))
+	})
+}
+
 // CreatedAtEQ applies the EQ predicate on the "created_at" field.
 func CreatedAtEQ(v time.Time) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
@@ -1074,6 +1088,20 @@ func CreatedAtLT(v time.Time) predicate.StoreBalanceAccount {
 func CreatedAtLTE(v time.Time) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
 		s.Where(sql.LTE(s.C(FieldCreatedAt), v))
+	})
+}
+
+// CreatedAtIsNil applies the IsNil predicate on the "created_at" field.
+func CreatedAtIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldCreatedAt)))
+	})
+}
+
+// CreatedAtNotNil applies the NotNil predicate on the "created_at" field.
+func CreatedAtNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldCreatedAt)))
 	})
 }
 

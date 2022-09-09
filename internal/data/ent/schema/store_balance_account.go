@@ -15,16 +15,16 @@ type StoreBalanceAccount struct {
 func (StoreBalanceAccount) Fields() []ent.Field {
 	return []ent.Field{
 		field.Uint32("id").Comment("主键自增"),
-		field.String("account_no").Optional().Comment("账号编码"),
-		field.String("store_code").Optional().Comment("门店编号"),
+		field.String("account_no").Unique().Optional().Comment("账号编码"),
+		field.String("store_code").Unique().Optional().Comment("门店编号"),
 		field.String("upper_organ_no").Optional().Comment("上级机构号 加盟商franchisee_id"),
 		field.String("pwd").Optional().Comment("密码"),
 		field.String("pwd_salt").Optional().Comment("密码加盐"),
 		field.Float("balance_fee").Optional().Comment("余额"),
 		field.Float("total_charge_fee").Optional().Comment("总充值金额"),
 		field.Int8("is_deleted").Optional().Comment("0未删除 1已删除"),
-		field.Time("updated_at").Comment("更新时间"),
-		field.Time("created_at").Comment("创建时间")}
+		field.Time("updated_at").Optional().Comment("更新时间"),
+		field.Time("created_at").Optional().Comment("创建时间")}
 }
 func (StoreBalanceAccount) Edges() []ent.Edge {
 	return nil

@@ -643,9 +643,22 @@ func (m *StoreBalanceAccountMutation) OldUpdatedAt(ctx context.Context) (v time.
 	return oldValue.UpdatedAt, nil
 }
 
+// ClearUpdatedAt clears the value of the "updated_at" field.
+func (m *StoreBalanceAccountMutation) ClearUpdatedAt() {
+	m.updated_at = nil
+	m.clearedFields[storebalanceaccount.FieldUpdatedAt] = struct{}{}
+}
+
+// UpdatedAtCleared returns if the "updated_at" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) UpdatedAtCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldUpdatedAt]
+	return ok
+}
+
 // ResetUpdatedAt resets all changes to the "updated_at" field.
 func (m *StoreBalanceAccountMutation) ResetUpdatedAt() {
 	m.updated_at = nil
+	delete(m.clearedFields, storebalanceaccount.FieldUpdatedAt)
 }
 
 // SetCreatedAt sets the "created_at" field.
@@ -679,9 +692,22 @@ func (m *StoreBalanceAccountMutation) OldCreatedAt(ctx context.Context) (v time.
 	return oldValue.CreatedAt, nil
 }
 
+// ClearCreatedAt clears the value of the "created_at" field.
+func (m *StoreBalanceAccountMutation) ClearCreatedAt() {
+	m.created_at = nil
+	m.clearedFields[storebalanceaccount.FieldCreatedAt] = struct{}{}
+}
+
+// CreatedAtCleared returns if the "created_at" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) CreatedAtCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldCreatedAt]
+	return ok
+}
+
 // ResetCreatedAt resets all changes to the "created_at" field.
 func (m *StoreBalanceAccountMutation) ResetCreatedAt() {
 	m.created_at = nil
+	delete(m.clearedFields, storebalanceaccount.FieldCreatedAt)
 }
 
 // Where appends a list predicates to the StoreBalanceAccountMutation builder.
@@ -963,6 +989,12 @@ func (m *StoreBalanceAccountMutation) ClearedFields() []string {
 	if m.FieldCleared(storebalanceaccount.FieldIsDeleted) {
 		fields = append(fields, storebalanceaccount.FieldIsDeleted)
 	}
+	if m.FieldCleared(storebalanceaccount.FieldUpdatedAt) {
+		fields = append(fields, storebalanceaccount.FieldUpdatedAt)
+	}
+	if m.FieldCleared(storebalanceaccount.FieldCreatedAt) {
+		fields = append(fields, storebalanceaccount.FieldCreatedAt)
+	}
 	return fields
 }
 
@@ -1000,6 +1032,12 @@ func (m *StoreBalanceAccountMutation) ClearField(name string) error {
 		return nil
 	case storebalanceaccount.FieldIsDeleted:
 		m.ClearIsDeleted()
+		return nil
+	case storebalanceaccount.FieldUpdatedAt:
+		m.ClearUpdatedAt()
+		return nil
+	case storebalanceaccount.FieldCreatedAt:
+		m.ClearCreatedAt()
 		return nil
 	}
 	return fmt.Errorf("unknown StoreBalanceAccount nullable field %s", name)

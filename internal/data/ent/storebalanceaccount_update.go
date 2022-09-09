@@ -215,9 +215,37 @@ func (sbau *StoreBalanceAccountUpdate) SetUpdatedAt(t time.Time) *StoreBalanceAc
 	return sbau
 }
 
+// SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
+func (sbau *StoreBalanceAccountUpdate) SetNillableUpdatedAt(t *time.Time) *StoreBalanceAccountUpdate {
+	if t != nil {
+		sbau.SetUpdatedAt(*t)
+	}
+	return sbau
+}
+
+// ClearUpdatedAt clears the value of the "updated_at" field.
+func (sbau *StoreBalanceAccountUpdate) ClearUpdatedAt() *StoreBalanceAccountUpdate {
+	sbau.mutation.ClearUpdatedAt()
+	return sbau
+}
+
 // SetCreatedAt sets the "created_at" field.
 func (sbau *StoreBalanceAccountUpdate) SetCreatedAt(t time.Time) *StoreBalanceAccountUpdate {
 	sbau.mutation.SetCreatedAt(t)
+	return sbau
+}
+
+// SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
+func (sbau *StoreBalanceAccountUpdate) SetNillableCreatedAt(t *time.Time) *StoreBalanceAccountUpdate {
+	if t != nil {
+		sbau.SetCreatedAt(*t)
+	}
+	return sbau
+}
+
+// ClearCreatedAt clears the value of the "created_at" field.
+func (sbau *StoreBalanceAccountUpdate) ClearCreatedAt() *StoreBalanceAccountUpdate {
+	sbau.mutation.ClearCreatedAt()
 	return sbau
 }
 
@@ -430,10 +458,22 @@ func (sbau *StoreBalanceAccountUpdate) sqlSave(ctx context.Context) (n int, err 
 			Column: storebalanceaccount.FieldUpdatedAt,
 		})
 	}
+	if sbau.mutation.UpdatedAtCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeTime,
+			Column: storebalanceaccount.FieldUpdatedAt,
+		})
+	}
 	if value, ok := sbau.mutation.CreatedAt(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeTime,
 			Value:  value,
+			Column: storebalanceaccount.FieldCreatedAt,
+		})
+	}
+	if sbau.mutation.CreatedAtCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeTime,
 			Column: storebalanceaccount.FieldCreatedAt,
 		})
 	}
@@ -643,9 +683,37 @@ func (sbauo *StoreBalanceAccountUpdateOne) SetUpdatedAt(t time.Time) *StoreBalan
 	return sbauo
 }
 
+// SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
+func (sbauo *StoreBalanceAccountUpdateOne) SetNillableUpdatedAt(t *time.Time) *StoreBalanceAccountUpdateOne {
+	if t != nil {
+		sbauo.SetUpdatedAt(*t)
+	}
+	return sbauo
+}
+
+// ClearUpdatedAt clears the value of the "updated_at" field.
+func (sbauo *StoreBalanceAccountUpdateOne) ClearUpdatedAt() *StoreBalanceAccountUpdateOne {
+	sbauo.mutation.ClearUpdatedAt()
+	return sbauo
+}
+
 // SetCreatedAt sets the "created_at" field.
 func (sbauo *StoreBalanceAccountUpdateOne) SetCreatedAt(t time.Time) *StoreBalanceAccountUpdateOne {
 	sbauo.mutation.SetCreatedAt(t)
+	return sbauo
+}
+
+// SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
+func (sbauo *StoreBalanceAccountUpdateOne) SetNillableCreatedAt(t *time.Time) *StoreBalanceAccountUpdateOne {
+	if t != nil {
+		sbauo.SetCreatedAt(*t)
+	}
+	return sbauo
+}
+
+// ClearCreatedAt clears the value of the "created_at" field.
+func (sbauo *StoreBalanceAccountUpdateOne) ClearCreatedAt() *StoreBalanceAccountUpdateOne {
+	sbauo.mutation.ClearCreatedAt()
 	return sbauo
 }
 
@@ -888,10 +956,22 @@ func (sbauo *StoreBalanceAccountUpdateOne) sqlSave(ctx context.Context) (_node *
 			Column: storebalanceaccount.FieldUpdatedAt,
 		})
 	}
+	if sbauo.mutation.UpdatedAtCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeTime,
+			Column: storebalanceaccount.FieldUpdatedAt,
+		})
+	}
 	if value, ok := sbauo.mutation.CreatedAt(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeTime,
 			Value:  value,
+			Column: storebalanceaccount.FieldCreatedAt,
+		})
+	}
+	if sbauo.mutation.CreatedAtCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeTime,
 			Column: storebalanceaccount.FieldCreatedAt,
 		})
 	}
