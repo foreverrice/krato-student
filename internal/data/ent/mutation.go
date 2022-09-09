@@ -34,6 +34,7 @@ type StoreBalanceAccountMutation struct {
 	op                  Op
 	typ                 string
 	id                  *uint32
+	account_no          *string
 	store_code          *string
 	upper_organ_no      *string
 	pwd                 *string
@@ -154,6 +155,55 @@ func (m *StoreBalanceAccountMutation) IDs(ctx context.Context) ([]uint32, error)
 	default:
 		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
 	}
+}
+
+// SetAccountNo sets the "account_no" field.
+func (m *StoreBalanceAccountMutation) SetAccountNo(s string) {
+	m.account_no = &s
+}
+
+// AccountNo returns the value of the "account_no" field in the mutation.
+func (m *StoreBalanceAccountMutation) AccountNo() (r string, exists bool) {
+	v := m.account_no
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldAccountNo returns the old "account_no" field's value of the StoreBalanceAccount entity.
+// If the StoreBalanceAccount object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StoreBalanceAccountMutation) OldAccountNo(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldAccountNo is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldAccountNo requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldAccountNo: %w", err)
+	}
+	return oldValue.AccountNo, nil
+}
+
+// ClearAccountNo clears the value of the "account_no" field.
+func (m *StoreBalanceAccountMutation) ClearAccountNo() {
+	m.account_no = nil
+	m.clearedFields[storebalanceaccount.FieldAccountNo] = struct{}{}
+}
+
+// AccountNoCleared returns if the "account_no" field was cleared in this mutation.
+func (m *StoreBalanceAccountMutation) AccountNoCleared() bool {
+	_, ok := m.clearedFields[storebalanceaccount.FieldAccountNo]
+	return ok
+}
+
+// ResetAccountNo resets all changes to the "account_no" field.
+func (m *StoreBalanceAccountMutation) ResetAccountNo() {
+	m.account_no = nil
+	delete(m.clearedFields, storebalanceaccount.FieldAccountNo)
 }
 
 // SetStoreCode sets the "store_code" field.
@@ -593,22 +643,9 @@ func (m *StoreBalanceAccountMutation) OldUpdatedAt(ctx context.Context) (v time.
 	return oldValue.UpdatedAt, nil
 }
 
-// ClearUpdatedAt clears the value of the "updated_at" field.
-func (m *StoreBalanceAccountMutation) ClearUpdatedAt() {
-	m.updated_at = nil
-	m.clearedFields[storebalanceaccount.FieldUpdatedAt] = struct{}{}
-}
-
-// UpdatedAtCleared returns if the "updated_at" field was cleared in this mutation.
-func (m *StoreBalanceAccountMutation) UpdatedAtCleared() bool {
-	_, ok := m.clearedFields[storebalanceaccount.FieldUpdatedAt]
-	return ok
-}
-
 // ResetUpdatedAt resets all changes to the "updated_at" field.
 func (m *StoreBalanceAccountMutation) ResetUpdatedAt() {
 	m.updated_at = nil
-	delete(m.clearedFields, storebalanceaccount.FieldUpdatedAt)
 }
 
 // SetCreatedAt sets the "created_at" field.
@@ -642,22 +679,9 @@ func (m *StoreBalanceAccountMutation) OldCreatedAt(ctx context.Context) (v time.
 	return oldValue.CreatedAt, nil
 }
 
-// ClearCreatedAt clears the value of the "created_at" field.
-func (m *StoreBalanceAccountMutation) ClearCreatedAt() {
-	m.created_at = nil
-	m.clearedFields[storebalanceaccount.FieldCreatedAt] = struct{}{}
-}
-
-// CreatedAtCleared returns if the "created_at" field was cleared in this mutation.
-func (m *StoreBalanceAccountMutation) CreatedAtCleared() bool {
-	_, ok := m.clearedFields[storebalanceaccount.FieldCreatedAt]
-	return ok
-}
-
 // ResetCreatedAt resets all changes to the "created_at" field.
 func (m *StoreBalanceAccountMutation) ResetCreatedAt() {
 	m.created_at = nil
-	delete(m.clearedFields, storebalanceaccount.FieldCreatedAt)
 }
 
 // Where appends a list predicates to the StoreBalanceAccountMutation builder.
@@ -679,7 +703,10 @@ func (m *StoreBalanceAccountMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *StoreBalanceAccountMutation) Fields() []string {
-	fields := make([]string, 0, 9)
+	fields := make([]string, 0, 10)
+	if m.account_no != nil {
+		fields = append(fields, storebalanceaccount.FieldAccountNo)
+	}
 	if m.store_code != nil {
 		fields = append(fields, storebalanceaccount.FieldStoreCode)
 	}
@@ -715,6 +742,8 @@ func (m *StoreBalanceAccountMutation) Fields() []string {
 // schema.
 func (m *StoreBalanceAccountMutation) Field(name string) (ent.Value, bool) {
 	switch name {
+	case storebalanceaccount.FieldAccountNo:
+		return m.AccountNo()
 	case storebalanceaccount.FieldStoreCode:
 		return m.StoreCode()
 	case storebalanceaccount.FieldUpperOrganNo:
@@ -742,6 +771,8 @@ func (m *StoreBalanceAccountMutation) Field(name string) (ent.Value, bool) {
 // database failed.
 func (m *StoreBalanceAccountMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
+	case storebalanceaccount.FieldAccountNo:
+		return m.OldAccountNo(ctx)
 	case storebalanceaccount.FieldStoreCode:
 		return m.OldStoreCode(ctx)
 	case storebalanceaccount.FieldUpperOrganNo:
@@ -769,6 +800,13 @@ func (m *StoreBalanceAccountMutation) OldField(ctx context.Context, name string)
 // type.
 func (m *StoreBalanceAccountMutation) SetField(name string, value ent.Value) error {
 	switch name {
+	case storebalanceaccount.FieldAccountNo:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetAccountNo(v)
+		return nil
 	case storebalanceaccount.FieldStoreCode:
 		v, ok := value.(string)
 		if !ok {
@@ -901,6 +939,9 @@ func (m *StoreBalanceAccountMutation) AddField(name string, value ent.Value) err
 // mutation.
 func (m *StoreBalanceAccountMutation) ClearedFields() []string {
 	var fields []string
+	if m.FieldCleared(storebalanceaccount.FieldAccountNo) {
+		fields = append(fields, storebalanceaccount.FieldAccountNo)
+	}
 	if m.FieldCleared(storebalanceaccount.FieldStoreCode) {
 		fields = append(fields, storebalanceaccount.FieldStoreCode)
 	}
@@ -922,12 +963,6 @@ func (m *StoreBalanceAccountMutation) ClearedFields() []string {
 	if m.FieldCleared(storebalanceaccount.FieldIsDeleted) {
 		fields = append(fields, storebalanceaccount.FieldIsDeleted)
 	}
-	if m.FieldCleared(storebalanceaccount.FieldUpdatedAt) {
-		fields = append(fields, storebalanceaccount.FieldUpdatedAt)
-	}
-	if m.FieldCleared(storebalanceaccount.FieldCreatedAt) {
-		fields = append(fields, storebalanceaccount.FieldCreatedAt)
-	}
 	return fields
 }
 
@@ -942,6 +977,9 @@ func (m *StoreBalanceAccountMutation) FieldCleared(name string) bool {
 // error if the field is not defined in the schema.
 func (m *StoreBalanceAccountMutation) ClearField(name string) error {
 	switch name {
+	case storebalanceaccount.FieldAccountNo:
+		m.ClearAccountNo()
+		return nil
 	case storebalanceaccount.FieldStoreCode:
 		m.ClearStoreCode()
 		return nil
@@ -963,12 +1001,6 @@ func (m *StoreBalanceAccountMutation) ClearField(name string) error {
 	case storebalanceaccount.FieldIsDeleted:
 		m.ClearIsDeleted()
 		return nil
-	case storebalanceaccount.FieldUpdatedAt:
-		m.ClearUpdatedAt()
-		return nil
-	case storebalanceaccount.FieldCreatedAt:
-		m.ClearCreatedAt()
-		return nil
 	}
 	return fmt.Errorf("unknown StoreBalanceAccount nullable field %s", name)
 }
@@ -977,6 +1009,9 @@ func (m *StoreBalanceAccountMutation) ClearField(name string) error {
 // It returns an error if the field is not defined in the schema.
 func (m *StoreBalanceAccountMutation) ResetField(name string) error {
 	switch name {
+	case storebalanceaccount.FieldAccountNo:
+		m.ResetAccountNo()
+		return nil
 	case storebalanceaccount.FieldStoreCode:
 		m.ResetStoreCode()
 		return nil

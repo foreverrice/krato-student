@@ -80,6 +80,13 @@ func IDLTE(id uint32) predicate.StoreBalanceAccount {
 	})
 }
 
+// AccountNo applies equality check predicate on the "account_no" field. It's identical to AccountNoEQ.
+func AccountNo(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldAccountNo), v))
+	})
+}
+
 // StoreCode applies equality check predicate on the "store_code" field. It's identical to StoreCodeEQ.
 func StoreCode(v string) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
@@ -140,6 +147,119 @@ func UpdatedAt(v time.Time) predicate.StoreBalanceAccount {
 func CreatedAt(v time.Time) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldCreatedAt), v))
+	})
+}
+
+// AccountNoEQ applies the EQ predicate on the "account_no" field.
+func AccountNoEQ(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldAccountNo), v))
+	})
+}
+
+// AccountNoNEQ applies the NEQ predicate on the "account_no" field.
+func AccountNoNEQ(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NEQ(s.C(FieldAccountNo), v))
+	})
+}
+
+// AccountNoIn applies the In predicate on the "account_no" field.
+func AccountNoIn(vs ...string) predicate.StoreBalanceAccount {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.In(s.C(FieldAccountNo), v...))
+	})
+}
+
+// AccountNoNotIn applies the NotIn predicate on the "account_no" field.
+func AccountNoNotIn(vs ...string) predicate.StoreBalanceAccount {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotIn(s.C(FieldAccountNo), v...))
+	})
+}
+
+// AccountNoGT applies the GT predicate on the "account_no" field.
+func AccountNoGT(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.GT(s.C(FieldAccountNo), v))
+	})
+}
+
+// AccountNoGTE applies the GTE predicate on the "account_no" field.
+func AccountNoGTE(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.GTE(s.C(FieldAccountNo), v))
+	})
+}
+
+// AccountNoLT applies the LT predicate on the "account_no" field.
+func AccountNoLT(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.LT(s.C(FieldAccountNo), v))
+	})
+}
+
+// AccountNoLTE applies the LTE predicate on the "account_no" field.
+func AccountNoLTE(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.LTE(s.C(FieldAccountNo), v))
+	})
+}
+
+// AccountNoContains applies the Contains predicate on the "account_no" field.
+func AccountNoContains(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.Contains(s.C(FieldAccountNo), v))
+	})
+}
+
+// AccountNoHasPrefix applies the HasPrefix predicate on the "account_no" field.
+func AccountNoHasPrefix(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.HasPrefix(s.C(FieldAccountNo), v))
+	})
+}
+
+// AccountNoHasSuffix applies the HasSuffix predicate on the "account_no" field.
+func AccountNoHasSuffix(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.HasSuffix(s.C(FieldAccountNo), v))
+	})
+}
+
+// AccountNoIsNil applies the IsNil predicate on the "account_no" field.
+func AccountNoIsNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldAccountNo)))
+	})
+}
+
+// AccountNoNotNil applies the NotNil predicate on the "account_no" field.
+func AccountNoNotNil() predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldAccountNo)))
+	})
+}
+
+// AccountNoEqualFold applies the EqualFold predicate on the "account_no" field.
+func AccountNoEqualFold(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.EqualFold(s.C(FieldAccountNo), v))
+	})
+}
+
+// AccountNoContainsFold applies the ContainsFold predicate on the "account_no" field.
+func AccountNoContainsFold(v string) predicate.StoreBalanceAccount {
+	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
+		s.Where(sql.ContainsFold(s.C(FieldAccountNo), v))
 	})
 }
 
@@ -893,20 +1013,6 @@ func UpdatedAtLTE(v time.Time) predicate.StoreBalanceAccount {
 	})
 }
 
-// UpdatedAtIsNil applies the IsNil predicate on the "updated_at" field.
-func UpdatedAtIsNil() predicate.StoreBalanceAccount {
-	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
-		s.Where(sql.IsNull(s.C(FieldUpdatedAt)))
-	})
-}
-
-// UpdatedAtNotNil applies the NotNil predicate on the "updated_at" field.
-func UpdatedAtNotNil() predicate.StoreBalanceAccount {
-	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
-		s.Where(sql.NotNull(s.C(FieldUpdatedAt)))
-	})
-}
-
 // CreatedAtEQ applies the EQ predicate on the "created_at" field.
 func CreatedAtEQ(v time.Time) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
@@ -968,20 +1074,6 @@ func CreatedAtLT(v time.Time) predicate.StoreBalanceAccount {
 func CreatedAtLTE(v time.Time) predicate.StoreBalanceAccount {
 	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
 		s.Where(sql.LTE(s.C(FieldCreatedAt), v))
-	})
-}
-
-// CreatedAtIsNil applies the IsNil predicate on the "created_at" field.
-func CreatedAtIsNil() predicate.StoreBalanceAccount {
-	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
-		s.Where(sql.IsNull(s.C(FieldCreatedAt)))
-	})
-}
-
-// CreatedAtNotNil applies the NotNil predicate on the "created_at" field.
-func CreatedAtNotNil() predicate.StoreBalanceAccount {
-	return predicate.StoreBalanceAccount(func(s *sql.Selector) {
-		s.Where(sql.NotNull(s.C(FieldCreatedAt)))
 	})
 }
 

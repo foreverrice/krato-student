@@ -17,6 +17,8 @@ type StoreBalanceAccount struct {
 	// ID of the ent.
 	// 主键自增
 	ID uint32 `json:"id,omitempty"`
+	// 账号编码
+	AccountNo string `json:"account_no,omitempty"`
 	// 门店编号
 	StoreCode string `json:"store_code,omitempty"`
 	// 上级机构号 加盟商franchisee_id
@@ -46,7 +48,7 @@ func (*StoreBalanceAccount) scanValues(columns []string) ([]interface{}, error) 
 			values[i] = new(sql.NullFloat64)
 		case storebalanceaccount.FieldID, storebalanceaccount.FieldIsDeleted:
 			values[i] = new(sql.NullInt64)
-		case storebalanceaccount.FieldStoreCode, storebalanceaccount.FieldUpperOrganNo, storebalanceaccount.FieldPwd, storebalanceaccount.FieldPwdSalt:
+		case storebalanceaccount.FieldAccountNo, storebalanceaccount.FieldStoreCode, storebalanceaccount.FieldUpperOrganNo, storebalanceaccount.FieldPwd, storebalanceaccount.FieldPwdSalt:
 			values[i] = new(sql.NullString)
 		case storebalanceaccount.FieldUpdatedAt, storebalanceaccount.FieldCreatedAt:
 			values[i] = new(sql.NullTime)
@@ -71,6 +73,12 @@ func (sba *StoreBalanceAccount) assignValues(columns []string, values []interfac
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
 			sba.ID = uint32(value.Int64)
+		case storebalanceaccount.FieldAccountNo:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field account_no", values[i])
+			} else if value.Valid {
+				sba.AccountNo = value.String
+			}
 		case storebalanceaccount.FieldStoreCode:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field store_code", values[i])
@@ -153,6 +161,9 @@ func (sba *StoreBalanceAccount) String() string {
 	var builder strings.Builder
 	builder.WriteString("StoreBalanceAccount(")
 	builder.WriteString(fmt.Sprintf("id=%v, ", sba.ID))
+	builder.WriteString("account_no=")
+	builder.WriteString(sba.AccountNo)
+	builder.WriteString(", ")
 	builder.WriteString("store_code=")
 	builder.WriteString(sba.StoreCode)
 	builder.WriteString(", ")

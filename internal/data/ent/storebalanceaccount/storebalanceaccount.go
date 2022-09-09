@@ -7,6 +7,8 @@ const (
 	Label = "store_balance_account"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
+	// FieldAccountNo holds the string denoting the account_no field in the database.
+	FieldAccountNo = "account_no"
 	// FieldStoreCode holds the string denoting the store_code field in the database.
 	FieldStoreCode = "store_code"
 	// FieldUpperOrganNo holds the string denoting the upper_organ_no field in the database.
@@ -32,6 +34,7 @@ const (
 // Columns holds all SQL columns for storebalanceaccount fields.
 var Columns = []string{
 	FieldID,
+	FieldAccountNo,
 	FieldStoreCode,
 	FieldUpperOrganNo,
 	FieldPwd,

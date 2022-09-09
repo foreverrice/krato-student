@@ -4,6 +4,7 @@ package ent
 
 import (
 	"context"
+	"errors"
 	"finance/internal/data/ent/storebalanceaccount"
 	"fmt"
 	"time"
@@ -17,6 +18,20 @@ type StoreBalanceAccountCreate struct {
 	config
 	mutation *StoreBalanceAccountMutation
 	hooks    []Hook
+}
+
+// SetAccountNo sets the "account_no" field.
+func (sbac *StoreBalanceAccountCreate) SetAccountNo(s string) *StoreBalanceAccountCreate {
+	sbac.mutation.SetAccountNo(s)
+	return sbac
+}
+
+// SetNillableAccountNo sets the "account_no" field if the given value is not nil.
+func (sbac *StoreBalanceAccountCreate) SetNillableAccountNo(s *string) *StoreBalanceAccountCreate {
+	if s != nil {
+		sbac.SetAccountNo(*s)
+	}
+	return sbac
 }
 
 // SetStoreCode sets the "store_code" field.
@@ -123,25 +138,9 @@ func (sbac *StoreBalanceAccountCreate) SetUpdatedAt(t time.Time) *StoreBalanceAc
 	return sbac
 }
 
-// SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (sbac *StoreBalanceAccountCreate) SetNillableUpdatedAt(t *time.Time) *StoreBalanceAccountCreate {
-	if t != nil {
-		sbac.SetUpdatedAt(*t)
-	}
-	return sbac
-}
-
 // SetCreatedAt sets the "created_at" field.
 func (sbac *StoreBalanceAccountCreate) SetCreatedAt(t time.Time) *StoreBalanceAccountCreate {
 	sbac.mutation.SetCreatedAt(t)
-	return sbac
-}
-
-// SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (sbac *StoreBalanceAccountCreate) SetNillableCreatedAt(t *time.Time) *StoreBalanceAccountCreate {
-	if t != nil {
-		sbac.SetCreatedAt(*t)
-	}
 	return sbac
 }
 
@@ -227,6 +226,12 @@ func (sbac *StoreBalanceAccountCreate) ExecX(ctx context.Context) {
 
 // check runs all checks and user-defined validators on the builder.
 func (sbac *StoreBalanceAccountCreate) check() error {
+	if _, ok := sbac.mutation.UpdatedAt(); !ok {
+		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "StoreBalanceAccount.updated_at"`)}
+	}
+	if _, ok := sbac.mutation.CreatedAt(); !ok {
+		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "StoreBalanceAccount.created_at"`)}
+	}
 	return nil
 }
 
@@ -259,6 +264,14 @@ func (sbac *StoreBalanceAccountCreate) createSpec() (*StoreBalanceAccount, *sqlg
 	if id, ok := sbac.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
+	}
+	if value, ok := sbac.mutation.AccountNo(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: storebalanceaccount.FieldAccountNo,
+		})
+		_node.AccountNo = value
 	}
 	if value, ok := sbac.mutation.StoreCode(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{

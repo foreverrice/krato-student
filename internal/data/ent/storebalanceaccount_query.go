@@ -253,12 +253,12 @@ func (sbaq *StoreBalanceAccountQuery) Clone() *StoreBalanceAccountQuery {
 // Example:
 //
 //	var v []struct {
-//		StoreCode string `json:"store_code,omitempty"`
+//		AccountNo string `json:"account_no,omitempty"`
 //		Count int `json:"count,omitempty"`
 //	}
 //
 //	client.StoreBalanceAccount.Query().
-//		GroupBy(storebalanceaccount.FieldStoreCode).
+//		GroupBy(storebalanceaccount.FieldAccountNo).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
 //
@@ -282,11 +282,11 @@ func (sbaq *StoreBalanceAccountQuery) GroupBy(field string, fields ...string) *S
 // Example:
 //
 //	var v []struct {
-//		StoreCode string `json:"store_code,omitempty"`
+//		AccountNo string `json:"account_no,omitempty"`
 //	}
 //
 //	client.StoreBalanceAccount.Query().
-//		Select(storebalanceaccount.FieldStoreCode).
+//		Select(storebalanceaccount.FieldAccountNo).
 //		Scan(ctx, &v)
 //
 func (sbaq *StoreBalanceAccountQuery) Select(fields ...string) *StoreBalanceAccountSelect {
